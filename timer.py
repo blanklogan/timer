@@ -1,5 +1,10 @@
+import pygame
 import time
 from datetime import datetime
+
+
+pygame.init()
+alarm_sfx = "alarm.wav"
 
 
 desired_timerhrs = input("Enter hours: ")
@@ -20,6 +25,12 @@ def countdown(t:int):
         time.sleep(1)
         t -= 1
     if t == 0:
+        pygame.mixer.init()
+        pygame.mixer.music.load(alarm_sfx)
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy():
+            time.sleep(0.1)
         print ("Timer is done")
+
 
 countdown(t)
